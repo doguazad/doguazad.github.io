@@ -3,14 +3,14 @@
   <head>
     <title>Kare Kod Okuyucu | @doguazadd | OpenAI</title>
     <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Azad Doğu | doguazad | doguazadd | twitter/doguazadd  | instagram/doguazadd ">
-<meta name="keywords" content="doguazad,doguazadd,azad doğu, doğu azad, gezegendigital">
-<meta name="robots" content="noindex, nofollow">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="language" content="Turkish">
-<link rel="shortcut icon" href="https://cdn.r10.net/image.php?u=164579" type="image/x-icon" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Azad Doğu | doguazad | doguazadd | twitter/doguazadd  | instagram/doguazadd ">
+    <meta name="keywords" content="doguazad,doguazadd,azad doğu, doğu azad, gezegendigital">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="Turkish">
+    <link rel="shortcut icon" href="https://cdn.r10.net/image.php?u=164579" type="image/x-icon" />
   </head>
   <body> <center>
     <h1>Kare Kod Okuyucu</h1>
@@ -23,7 +23,7 @@
     <button id="open-link-button" disabled>Linke Git</button>
     
     <script>
-      // Kullanılacak değişkenleri tanımlama
+      
       const video = document.getElementById("video");
       const canvas = document.createElement("canvas");
       const context = canvas.getContext("2d");
@@ -38,7 +38,7 @@
         }
       };
       
-      // Kamera açma fonksiyonu
+      
       function openCamera() {
         navigator.mediaDevices.getUserMedia(constraints)
           .then(stream => {
@@ -52,7 +52,7 @@
           });
       }
       
-      // Kare kod tarama fonksiyonu
+      
       function scanCode() {
         if (video.readyState === video.HAVE_ENOUGH_DATA) {
           canvas.width = video.videoWidth;
@@ -73,7 +73,7 @@
         requestAnimationFrame(scanCode);
       }
       
-      // Kamera aç butonuna tıklama olayı
+      
       openCameraButton.addEventListener("click", () => {
         openCamera();
       });
