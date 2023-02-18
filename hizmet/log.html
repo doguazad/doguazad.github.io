@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kullanıcı Olayları</title>
+  </head>
+  <body> <center> <h2>Kullanıcı Hareket Kayıtları</h2>
+    <p id="p1"></p>
+    <button onclick="showLogs()">Kayıtları Göster</button>
+
+    <script>
+      let logs = [];
+
+      // Tıklama olayı takibi
+      document.addEventListener('click', function(event) {
+        logs.push('Tıklama olayı gerçekleşti: ' + event.target);
+      });
+
+      // Fare hareketi olayı takibi
+      document.addEventListener('mousemove', function(event) {
+        logs.push('Fare hareketi olayı gerçekleşti: x:' + event.clientX + ' y:' + event.clientY);
+      });
+
+      // Tuşa basma olayı takibi
+      document.addEventListener('keydown', function(event) {
+        logs.push('Tuşa basma olayı gerçekleşti: ' + event.key);
+      });
+
+      // Sekme olayı takibi
+      let isTabActive = true;
+      window.addEventListener('blur', function() {
+        isTabActive = false;
+        document.body.style.backgroundColor = 'red';
+        document.getElementById('p1').innerHTML = 'Uyarı: Sekme dışındasınız!';
+      });
+
+      window.addEventListener('focus', function() {
+        isTabActive = true;
+        document.body.style.backgroundColor = '';
+        document.getElementById('p1').innerHTML = '';
+      });
+
+      function showLogs() {
+        let logText = '';
+        for (let i = 0; i < logs.length; i++) {
+          logText += logs[i] + '<br>';
+        }
+        document.getElementById('p1').innerHTML = logText;
+      }
+    </script></center>
+  </body>
+</html>
