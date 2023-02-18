@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kare Kod Okuyucu</title>
+  </head>
+  <body>
+    <h1>Kare Kod Okuyucu</h1>
+    <p>Kamerayı açmak için "Kamera Aç" butonuna tıklayın.</p>
+    <video id="video" style="width: 100%; max-width: 600px;"></video>
+    
+    <div id="result-container"></div>
+    
+    <button id="open-camera-button">Kamera Aç</button>
+    <button id="open-link-button" disabled>Linke Git</button>
+    
+    <script>
+      // Kullanılacak değişkenleri tanımlama
+      const video = document.getElementById("video");
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+      const resultContainer = document.getElementById("result-container");
+      const openCameraButton = document.getElementById("open-camera-button");
+      const openLinkButton = document.getElementById("open-link-button");
+      
+      // Video akışı ayarları
+      const constraints = {
+        video: {
+          facingMode: "environment" // Arka kamera kullan
+        }
+      };
+      
+      // Kamera açma fonksiyonu
+      function openCamera() {
+        navigator.mediaDevices.getUserMedia(constraints)
+          .then(stream => {
+            video.srcObject = stream;
+            video.play();
+            requestAnimationFrame(scanCode);
+            openCameraButton.disabled = true;
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
+      
+      // Kare kod tarama fonksiyonu
+      function scanCode() {
+        if (video.readyState === video.HAVE_ENOUGH_DATA) {
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
+          context.drawImage(video, 0, 0, canvas.width, canvas.height);
+          const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+          const code = jsQR(imageData.data, imageData.width, imageData.height, {
+            inversionAttempts: "dontInvert"
+          });
+          if (code) {
+            resultContainer.textContent = "Kare kod bulundu: " + code.data;
+            openLinkButton.disabled = false;
+            openLinkButton.addEventListener("click", () => {
+              window.location.href = code.data;
+            });
+          }
+        }
+        requestAnimationFrame(scanCode);
+      }
+      
+      // Kamera aç butonuna tıklama olayı
+      openCameraButton.addEventListener("click", () => {
+        openCamera();
+      });
+      
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
+  </body>
+</html>
