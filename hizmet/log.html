@@ -1,40 +1,55 @@
+
 <!DOCTYPE html>
 <html>
   <head>
     <title>Kullanıcı Olayları | @doguazadd | OpenAI</title>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Azad Doğu | doguazad | doguazadd | twitter/doguazadd  | instagram/doguazadd ">
-<meta name="keywords" content="doguazad,doguazadd,azad doğu, doğu azad, gezegendigital">
-<meta name="robots" content="noindex, nofollow">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="language" content="Turkish">
-<link rel="shortcut icon" href="https://cdn.r10.net/image.php?u=164579" type="image/x-icon" />
-  </head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Azad Doğu | doguazad | doguazadd | twitter/doguazadd  | instagram/doguazadd ">
+    <meta name="keywords" content="doguazad,doguazadd,azad doğu, doğu azad, gezegendigital">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="Turkish">
+    <link rel="shortcut icon" href="https://cdn.r10.net/image.php?u=164579" type="image/x-icon" />
+        <style>
+      #follower {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: red;
+      }
+    </style>
+  </head><div id="follower"></div>
   <body> <center> <h2>Kullanıcı Hareket Kayıtları</h2>
     <p id="p1"></p>
     <button onclick="showLogs()">Kayıtları Göster</button>
 
     <script>
+       document.addEventListener('mousemove', function(event) {
+        let follower = document.getElementById('follower');
+        follower.style.left = event.clientX + 'px';
+        follower.style.top = event.clientY + 'px';
+      });
       let logs = [];
 
-      // Tıklama olayı takibi
+      
       document.addEventListener('click', function(event) {
         logs.push('Tıklama olayı gerçekleşti: ' + event.target);
       });
 
-      // Fare hareketi olayı takibi
+  
       document.addEventListener('mousemove', function(event) {
         logs.push('Fare hareketi olayı gerçekleşti: x:' + event.clientX + ' y:' + event.clientY);
       });
 
-      // Tuşa basma olayı takibi
+
       document.addEventListener('keydown', function(event) {
         logs.push('Tuşa basma olayı gerçekleşti: ' + event.key);
       });
 
-      // Sekme olayı takibi
+
       let isTabActive = true;
       window.addEventListener('blur', function() {
         isTabActive = false;
@@ -55,6 +70,8 @@
         }
         document.getElementById('p1').innerHTML = logText;
       }
+      
+      
     </script></center>
   </body>
 </html>
